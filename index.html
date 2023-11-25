@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Facial video editing with no temporal components">
-  <meta name="keywords" content="Diffusion Video Autoencoders, Video Editing, Face Video">
+        content="3D Photorealistic dataset curation with 2D natural imagess">
+  <meta name="keywords" content="3D photorealistic dataset, 3D dataset curation, Point cloud">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Diffusion Video Autoencoders: Toward Temporally Consistent Face Video Editing via Disentangled Video Encoding</title>
+  <title>Beyond Synthetic 3D Benchmark: Constructing Photorealistic 3D Datasets from Large-scale 2D Benchmarks</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -39,11 +39,11 @@
     <div class="container">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Diffusion Video Autoencoders:<br>Toward Temporally Consistent Face Video Editing<br>via Disentangled Video Encoding</h1>
+          <h1 class="title is-1 publication-title">Beyond Synthetic 3D Benchmark:<br>Constructing Photorealistic 3D Datasets from Large-scale 2D Benchmarks</h1>
           <div class="is-size-4 publication-authors">
-            <span class="author-block">CVPR 2023</span>
+            <span class="author-block">CVPR submission (Paper ID:17805)</span>
           </div>
-          <div class="is-size-5 publication-authors">
+          <!-- <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://www.linkedin.com/in/gyeongman-kim-592257225/">Gyeongman Kim</a><sup>1</sup>,</span>
             <span class="author-block">
@@ -56,28 +56,16 @@
               <a href="https://github.com/taki0112/">Junho Kim</a><sup>2</sup>,</span>
             <span class="author-block">
               <a href="https://sites.google.com/site/yangeh/">Eunho Yang</a><sup>1,3</sup>
-            <!-- <span class="author-block">
-              <a href="mailto:gmkim@kaist.ac.kr">Gyeongman Kim<sup>1</sup></a>,</span>
-            <span class="author-block">
-              <a href="mailto:shimazing@kaist.ac.kr">Hajin Shim<sup>1</sup></a>,</span>
-            <span class="author-block">
-              <a href="mailto:hyunsu1125.kim@navercorp.com">Hyunsu Kim<sup>2</sup></a>,</span>
-            <span class="author-block">
-              <a href="mailto:yunjey.choi@navercorp.com">Yunjey Choi<sup>2</sup></a>,</span>
-            <span class="author-block">
-              <a href="mailto:jhkim.ai@navercorp.com">Junho Kim<sup>2</sup></a>,</span>
-            <span class="author-block">
-              <a href="https://sites.google.com/site/yangeh/">Eunho Yang<sup>1,3</sup></a> -->
             </span>
-          </div>
+          </div> -->
 
-          <div class="is-size-5 publication-authors">
+          <!-- <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Korea Advanced Institute of Science and Technology (KAIST), South Korea</span>
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>2</sup>NAVER AI Lab &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="author-block"><sup>3</sup>AITRICS, South Korea</span>
-          </div>
+          </div> -->
 
           <div class="column has-text-centered">
             <div class="publication-links">
@@ -145,8 +133,8 @@
 <section class="hero">
   <div class="container">
     <div class="hero-body">
-      <img src="static/images/teaser.jpg"/>
-      <p>Figure: Face video editing. Our editing method shows improvement compared to the baseline (STIT) in terms of temporal consistency (left, “eyeglasses”) and robustness to the unusual case such as the hand-occluded face (right, “beard”).</p>
+      <img src="static/images/lift3d_main_figure_v2.png"/>
+      <p>Figure.<b>Photorealistc 3D dataset</b>. Our data curation pipeline generates the photorealistc 3D dataset, Lift3D, from single-view 2D image sets, capturing rich real-world information including RGB, structure, and environment. Models trained with Lift3D demonstrate transferability to various downstream vision tasks.</p>
     </div>
   </div>
 </section>
@@ -159,11 +147,7 @@
         <br>
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          Inspired by the impressive performance of recent face image editing methods, several studies have been naturally proposed to extend these methods to the face video editing task. 
-          One of the main challenges here is temporal consistency among edited frames, which is still unresolved. 
-          To this end, we propose a novel face video editing framework based on diffusion autoencoders that can successfully extract the decomposed features - for the first time as a face video editing model - of identity and motion from a given video. 
-          This modeling allows us to edit the video by simply manipulating the temporally invariant feature to the desired direction for the consistency. 
-          Another unique strength of our model is that, since our model is based on diffusion models, it can satisfy both reconstruction and edit capabilities at the same time, and is robust to corner cases in wild face videos (e.g. occluded faces) unlike the existing GAN-based methods. 
+          Recent advancements in pretraining methods for 3D data have demonstrated remarkable effectiveness, sparking a surge of interest in the development of foundational 3D models. However, 3D datasets used for pretraining still heavily rely on synthetic data and face limitations in terms of scale and category diversity. These constraints hinder the complete realization of the generalization capabilities of 3D pretrained models, which are vital for various downstream tasks. To address both the sim-to-real gap and dataset scale issues, We introduce a 3D photorealistic dataset curation framework that generates annotated 3D scene and object data from single-view 2D image datasets, fully harnessing real-world objects and the label information present in the natural images. We devise data reconstruction and filtering strategies to preserve the photorealistic qualities in the reconstructed 3D data. Extensive experimental results demonstrate that datasets curated using our framework exhibit superior generalizability across a diverse range of downstream tasks when compared to existing benchmark datasets.
         </div>
         <br>
       </div>
