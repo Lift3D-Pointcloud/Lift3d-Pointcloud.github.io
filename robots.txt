@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lift3d-pointcloud.github.io/sitemap.xml

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Facial video editing with no temporal components">
+  <meta name="keywords" content="Diffusion Video Autoencoders, Video Editing, Face Video">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diffusion Video Autoencoders: Toward Temporally Consistent Face Video Editing via Disentangled Video Encoding</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({            
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Diffusion Video Autoencoders:<br>Toward Temporally Consistent Face Video Editing<br>via Disentangled Video Encoding</h1>
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">CVPR 2023</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/gyeongman-kim-592257225/">Gyeongman Kim</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/hajin-shim-762b8a126/">Hajin Shim</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://blandocs.github.io/">Hyunsu Kim</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://yunjey.github.io/">Yunjey Choi</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/taki0112/">Junho Kim</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/yangeh/">Eunho Yang</a><sup>1,3</sup>
+            <!-- <span class="author-block">
+              <a href="mailto:gmkim@kaist.ac.kr">Gyeongman Kim<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="mailto:shimazing@kaist.ac.kr">Hajin Shim<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="mailto:hyunsu1125.kim@navercorp.com">Hyunsu Kim<sup>2</sup></a>,</span>
+            <span class="author-block">
+              <a href="mailto:yunjey.choi@navercorp.com">Yunjey Choi<sup>2</sup></a>,</span>
+            <span class="author-block">
+              <a href="mailto:jhkim.ai@navercorp.com">Junho Kim<sup>2</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/yangeh/">Eunho Yang<sup>1,3</sup></a> -->
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Korea Advanced Institute of Science and Technology (KAIST), South Korea</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>2</sup>NAVER AI Lab &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="author-block"><sup>3</sup>AITRICS, South Korea</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+             <span class="link-block">
+               <a href="https://openaccess.thecvf.com/content/CVPR2023/html/Kim_Diffusion_Video_Autoencoders_Toward_Temporally_Consistent_Face_Video_Editing_via_CVPR_2023_paper.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                 <span class="icon">
+                     <i class="fas fa-file-pdf"></i>
+                 </span>
+                 <span>Paper</span>
+               </a>
+             </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2212.02802"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=ISawoMRNuRU"
+                  class="external-link button is-normal is-rounded is-dark">
+                 <span class="icon">
+                     <i class="fab fa-youtube"></i>
+                 </span>
+                 <span>Video</span>
+               </a>
+             </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/man805/Diffusion-Video-Autoencoders"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Slides Link. -->
+              <span class="link-block">
+                <a href="https://nbviewer.org/github/Diff-Video-AE/Diff-Video-AE.github.io/blob/main/static/images/slides.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Slides</span>
+                  </a>
+              </span>
+              <!-- <p>
+              This page contains many wide videos which may not display well on a cellphone. Viewing on browser is recommended
+              </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-body">
+      <img src="static/images/teaser.jpg"/>
+      <p>Figure: Face video editing. Our editing method shows improvement compared to the baseline (STIT) in terms of temporal consistency (left, “eyeglasses”) and robustness to the unusual case such as the hand-occluded face (right, “beard”).</p>
+    </div>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section class="hero is-light">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <br>
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          Inspired by the impressive performance of recent face image editing methods, several studies have been naturally proposed to extend these methods to the face video editing task. 
+          One of the main challenges here is temporal consistency among edited frames, which is still unresolved. 
+          To this end, we propose a novel face video editing framework based on diffusion autoencoders that can successfully extract the decomposed features - for the first time as a face video editing model - of identity and motion from a given video. 
+          This modeling allows us to edit the video by simply manipulating the temporally invariant feature to the desired direction for the consistency. 
+          Another unique strength of our model is that, since our model is based on diffusion models, it can satisfy both reconstruction and edit capabilities at the same time, and is robust to corner cases in wild face videos (e.g. occluded faces) unlike the existing GAN-based methods. 
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method overview -->
+<section class="hero">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <br>
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="column">
+          <img src="static/images/overview.png"/>
+          <br>
+          <h2 class="subtitle has-text-centered">Overview of our Diffusion Video Autoencoder</h2>
+        </div>
+        <br>
+        <div class="content has-text-justified">
+          Our diffusion video autoencoder encode each frame into facial-related feature $z_{\text{face}}$ and a noise map $x_T$ containing background information. 
+          Facial-related feature $z_{\text{face}}$ consists of representative identity feature which is calculated by averaging the identity feature of all frames, and corresponding frame's motion feature. 
+          Afterward, by using $z_{\text{face}}$ as a condition, the forward process of the diffusion model results in the noise map $x_T$, where only the background information remains since all facial-related information is encoded in the condition. 
+          To achieve perfect decomposition of identity, motion, and background information, we use a pre-trained (identity, landmark) encoder that can extract each feature without training it. 
+          We modify the representative identity feature, compute a new facial-related feature $z_{\text{face}}^{\text{edit}}$, and then proceed with the reverse process to perform editing.
+          To train our model, we use two objectives. 
+          The first is the simple existing DDPM loss, which learns the distribution of face video frames by predicting the noise used in each batch. 
+          The second is the regularization loss, which helps ensure clear decomposition between the background and face information. 
+          When estimating original images from noisy images generated using different noises, we minimize the difference in the facial parts.
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparisons -->
+<section class="hero is-light">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <br>
+        <div class="section-title">
+          <h2 class="title is-3 is-centered">Comparison of Temporal Consistency for "beard"</h2>
+        </div>
+        <br>
+        <video id="compare_beard" autoplay controls loop muted width="100%">
+          <source src="static/videos/Comparison_video.mp4"
+                  type="video/mp4">
+        </video>
+        <div class="columns vertical_center">
+          <div class="column is-one-fifths"><div class="columns"><div class="column">
+            <p>Original</p>
+          </div></div></div>
+          <div class="column is-one-fifths"><div class="columns"><div class="column">
+            <p>Latent Transformer</p>
+          </div></div></div>
+          <div class="column is-one-fifths"><div class="columns"><div class="column">
+            <p>STIT</p>
+          </div></div></div>
+          <div class="column is-one-fifths"><div class="columns"><div class="column">
+            <p>VideoEditGAN</p>
+          </div></div></div>
+          <div class="column is-one-fifths"><div class="columns"><div class="column">
+            <p>Ours</p>
+          </div></div></div>
+        </div>
+        <h2 class="subtitle has-text-centered"><b>We demonstrate that only our diffusion video autoencoder successfully produces the consistent result.</b></h2>
+        <br>
+      </div>  
+    </div>
+  </div>
+</section>
+
+
+<!-- Additional Examples -->
+<section class="hero">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <br>
+        <div class="section-title">
+          <h2 class="title is-3 is-centered" id="additional">Additional Examples</h2>
+        </div>
+        <div class="publication-video-small">
+          <h2 class="subtitle has-text-centered">+Beard</h2>
+          <video id="beard" autoplay controls loop muted width="60%">
+            <source src="static/videos/+Beard_CLIP.mp4"
+                    type="video/mp4">
+          </video>
+          <div class="columns vertical_center">
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Original</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>STIT</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+          </div>
+          <br>
+          <h2 class="subtitle has-text-centered">+Eyeglasses</h2>
+          <video id="eyeglasses" autoplay controls loop muted width="60%">
+          <source src="static/videos/+Eyeglasses_CLIP.mp4"
+                  type="video/mp4">
+          </video>
+          <div class="columns vertical_center">
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Original</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>STIT</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+          </div>
+          <br>
+          <h2 class="subtitle has-text-centered">+Mustache</h2>
+          <video id="mustache" autoplay controls loop muted width="60%">
+            <source src="static/videos/+Mustache_CLIP.mp4"
+                    type="video/mp4">
+          </video>
+          <div class="columns vertical_center">
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Original</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>STIT</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+          </div>
+          <h2 class="subtitle has-text-centered"><b>Our method shows temporally consistent results.</b></h2>
+        </div>
+        <br>
+        <div class="publication-video-small">
+          <h2 class="subtitle has-text-centered">+Beard</h2>
+          <video id="occluded" autoplay controls loop muted width="60%">
+            <source src="static/videos/+Beard_occluded.mp4"
+                    type="video/mp4">
+          </video>
+          <div class="columns vertical_center">
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Original</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>STIT</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+          </div>
+          <h2 class="subtitle has-text-centered"><b>Our method also robustly reconstructs and edits the unusual case such as the hand-occluded face effectively.</b></h2>
+        </div>
+        <br>
+        <div class="publication-video-small">
+          <h2 class="subtitle has-text-centered">-Sideburns</h2>
+          <video id="sideburns" autoplay controls loop muted width="60%">
+            <source src="static/videos/-Sideburns_Classifier_long.mp4"
+                    type="video/mp4">
+          </video>
+          <div class="columns vertical_center">
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Original</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>STIT</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p></p>
+            </div></div></div>
+          </div>
+          <h2 class="subtitle has-text-centered"><b>Moreover, entire frames of long video can be edited at once by modifying the single identity feature.</b></h2>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Inference Time -->
+<section class="hero is-light">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <br>
+        <div class="section-title">
+          <h2 class="title is-3 is-centered" id="additional">Inference Time Comparison</h2>
+        </div>
+        <div class="publication-video-small">
+          <video id="sampler" autoplay controls loop muted width="100%">
+            <source src="static/videos/Comparison_time.mp4"
+                    type="video/mp4">
+          </video>
+          <div class="columns vertical_center">
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Original</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>STIT<br>12.0 sec/frame</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours (T=1000)<br>62.4 sec/frame</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours (T=100)<br>7.3 sec/frame</p>
+            </div></div></div>
+            <div class="column is-one-fifths"><div class="columns"><div class="column">
+              <p>Ours (+Sampler)<br>2.9 sec/frame</p>
+            </div></div></div>
+          </div>
+          <h2 class="subtitle has-text-centered"><b>Furthermore, our method can utilize ODE samplers to reduce time with comparable quality.</b></h2>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero" id="BibTeX">
+  <br>
+  <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <p>If you find our work useful, please cite our paper:</p>
+    <pre><code>@InProceedings{Kim_2023_CVPR,
+      author={Kim, Gyeongman and Shim, Hajin and Kim, Hyunsu and Choi, Yunjey and Kim, Junho and Yang, Eunho},
+      title={Diffusion Video Autoencoders: Toward Temporally Consistent Face Video Editing via Disentangled Video Encoding},
+      booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+      month={June},
+      year={2023},
+      pages={6091-6100}
+}
+    </code></pre>
+</div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2212.02802">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/man805/Diffusion-Video-Autoencoders" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want to reuse their <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
