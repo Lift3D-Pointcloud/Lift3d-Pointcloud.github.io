@@ -71,7 +71,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
              <span class="link-block">
-               <a href="https://openaccess.thecvf.com/content/CVPR2023/html/Kim_Diffusion_Video_Autoencoders_Toward_Temporally_Consistent_Face_Video_Editing_via_CVPR_2023_paper.html"
+               <a href=""
                   class="external-link button is-normal is-rounded is-dark">
                  <span class="icon">
                      <i class="fas fa-file-pdf"></i>
@@ -80,7 +80,7 @@
                </a>
              </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2212.02802"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -90,7 +90,7 @@
               </span>
               <!-- Video Link. -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=ISawoMRNuRU"
+                <a href=""
                   class="external-link button is-normal is-rounded is-dark">
                  <span class="icon">
                      <i class="fab fa-youtube"></i>
@@ -100,7 +100,7 @@
              </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/man805/Diffusion-Video-Autoencoders"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -110,7 +110,7 @@
               </span>
               <!-- Slides Link. -->
               <span class="link-block">
-                <a href="https://nbviewer.org/github/Diff-Video-AE/Diff-Video-AE.github.io/blob/main/static/images/slides.pdf"
+                <a href=""
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
@@ -162,22 +162,14 @@
       <div class="column is-four-fifths">
         <br>
         <h2 class="title is-3">Method Overview</h2>
-        <div class="column">
+        <!-- <div class="column">
           <img src="static/images/overview.png"/>
           <br>
           <h2 class="subtitle has-text-centered">Overview of our Diffusion Video Autoencoder</h2>
-        </div>
+        </div> -->
         <br>
         <div class="content has-text-justified">
-          Our diffusion video autoencoder encode each frame into facial-related feature $z_{\text{face}}$ and a noise map $x_T$ containing background information. 
-          Facial-related feature $z_{\text{face}}$ consists of representative identity feature which is calculated by averaging the identity feature of all frames, and corresponding frame's motion feature. 
-          Afterward, by using $z_{\text{face}}$ as a condition, the forward process of the diffusion model results in the noise map $x_T$, where only the background information remains since all facial-related information is encoded in the condition. 
-          To achieve perfect decomposition of identity, motion, and background information, we use a pre-trained (identity, landmark) encoder that can extract each feature without training it. 
-          We modify the representative identity feature, compute a new facial-related feature $z_{\text{face}}^{\text{edit}}$, and then proceed with the reverse process to perform editing.
-          To train our model, we use two objectives. 
-          The first is the simple existing DDPM loss, which learns the distribution of face video frames by predicting the noise used in each batch. 
-          The second is the regularization loss, which helps ensure clear decomposition between the background and face information. 
-          When estimating original images from noisy images generated using different noises, we minimize the difference in the facial parts.
+          We describe our simple yet effective procedure for constructing photorealistic point clouds from sets of natural images, aiming to enhance the versatility of 3D pretrained models in downstream real-world 3D vision tasks. The process begins with lifting images into point clouds, guided by the estimated depth map. Here, we observe a substantial variability in the fidelity of reconstructed 3D data, ranging from realistic point clouds to instances having noisy points or infeasible structures. Given that imprecise data may convey misleading signals to the model, hindering the model from learning a versatile structural prior, we devise data refinement strategies at both point and instance levels. Armed with this refinement process, photorealistic point clouds are selectively curated by filtering out erroneous points — byproducts of the reconstruction process — and excluding geometrically unnatural instances, achieved without any human supervision.
         </div>
         <br>
       </div>
@@ -225,7 +217,7 @@
 
 
 <!-- Additional Examples -->
-<section class="hero">
+<!-- <section class="hero">
   <div class="container">
     <div class="columns is-centered has-text-centered">
       <div class="column">
@@ -360,10 +352,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Inference Time -->
-<section class="hero is-light">
+<!-- <section class="hero is-light">
   <div class="container">
     <div class="columns is-centered has-text-centered">
       <div class="column">
@@ -399,7 +391,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 <!-- <section class="hero" id="BibTeX">
@@ -423,10 +415,10 @@
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
-         href="https://arxiv.org/abs/2212.02802">
+         href="">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/man805/Diffusion-Video-Autoencoders" class="external-link" disabled>
+      <a class="icon-link" href="" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
